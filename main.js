@@ -11,7 +11,7 @@ function printBoard(board) {
     console.log(board[6] + " " + board[7] + " " + board[8]);
     console.log("______");
 }
-
+printBoard(board); 
 
 function playerMove(board, player){
     for(let i = 0; i < board.length; i++) {
@@ -25,6 +25,28 @@ function playerMove(board, player){
 }
 
 let currentBoard = playerMove(board, player1);
+
+//Computer player step
+let step2;
+
+do{
+    step2 = Math.floor(Math.random() * board.length);
+    break;
+} while(step2 < board.length || step2 > board.length)
+
+function player2Move(board,player){
+    
+    for(let i = 0; i < board.length; i++) {
+        if(step2 == board[i-1] && step2 != step) {
+            board[i-1] = player;
+            printBoard(board);
+            break;
+        }
+    }
+    return board;
+}
+
+let currentBoard2 = player2Move(board, player2);
 
 // Winning combos
 let winningCombos = [
