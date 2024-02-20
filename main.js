@@ -13,6 +13,19 @@ function printBoard(board) {
 }
 
 
+function playerMove(board, player){
+    for(let i = 0; i < board.length; i++) {
+        if(step == board[i-1]) {
+            board[i-1] = player;
+            printBoard(board);
+            break;
+        }
+    }
+    return board;
+}
+
+let currentBoard = playerMove(board, player1);
+
 
 
 
