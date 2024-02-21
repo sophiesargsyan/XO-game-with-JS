@@ -36,17 +36,23 @@ do{
 
 function player2Move(board,player){
     
-    for(let i = 0; i < board.length; i++) {
-        if(step2 == board[i-1] && step2 != step) {
-            board[i-1] = player;
-            printBoard(board);
-            break;
+    setTimeout(function(){
+        for(let i = 0; i < board.length; i++) {
+            if(step2 == board[i-1] && step2 != step) {
+                board[i-1] = player;
+                printBoard(board);
+                break;
+            }
         }
-    }
+    },2000);
     return board;
 }
 
-let currentBoard2 = player2Move(board, player2);
+let currentBoard2 = player2Move(currentBoard, player2);
+
+// step = Number(prompt("Enter board-number for your second move: "));
+// let currentBoard3 = playerMove(currentBoard2, player1);
+
 
 // Winning combos
 let winningCombos = [
