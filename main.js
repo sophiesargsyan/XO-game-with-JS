@@ -1,22 +1,35 @@
 'use strict';
-
+//Choosing player
 let player1 = prompt('Choose x or o:').toUpperCase();
 let player2 = (player1 === 'X')? 'O':'X';
-let step = Number(prompt('Enter board-number for your move:'));
-let board = ['1','2','3','4','5','6','7','8','9', '10'];
+
+let player1Steps = [];
+let player2Steps = [];
+
+//Print Start Board
+let board = ['1','2','3','4','5','6','7','8','9','10'];
 
 function printBoard(board) {
-    console.log(board[0] + " " + board[1] + " " + board[2]);
-    console.log(board[3] + " " + board[4] + " " + board[5]);
-    console.log(board[6] + " " + board[7] + " " + board[8]);
-    console.log("______");
+    console.log(board[0] + " | " + board[1] + " | " + board[2]);
+    console.log(board[3] + " | " + board[4] + " | " + board[5]);
+    console.log(board[6] + " | " + board[7] + " | " + board[8]);
+    console.log("---------");
 }
 printBoard(board); 
 
-function playerMove(board, player){
+function player1Input(step){
+    step = +prompt('Enter value for your move: ');
+    return step;
+}
+
+player1Steps[0] = player1Input(player1Steps[0]);
+console.log(player1Steps)
+
+//1
+function player1Move (board, player,j) {
     for(let i = 0; i < board.length; i++) {
-        if(step == board[i-1]) {
-            board[i-1] = player;
+        if(player1Steps[j] == board[i]) {
+            board[i] = player;
             printBoard(board);
             break;
         }
@@ -24,38 +37,11 @@ function playerMove(board, player){
     return board;
 }
 
-let currentBoard = playerMove(board, player1);
+player1Move(board, player1, 0);
 
-//Computer player step
-let step2;
-
-do{
-    step2 = Math.floor(Math.random() * board.length);
-    break;
-} while(step2 < board.length || step2 > board.length)
-
-function player2Move(board,player){
-    
-    setTimeout(function(){
-        for(let i = 0; i < board.length; i++) {
-            if(step2 == board[i-1] && step2 != step) {
-                board[i-1] = player;
-                printBoard(board);
-                break;
-            }
-        }
-    },2000);
-    return board;
-}
-
-let currentBoard2 = player2Move(currentBoard, player2);
-
-// step = Number(prompt("Enter board-number for your second move: "));
-// let currentBoard3 = playerMove(currentBoard2, player1);
-
-
+/*
 // Winning combos
-let winningCombos = [
+let win = [
     [board[0],board[1],board[2]],
     [board[3],board[4],board[5]],
     [board[6],board[7],board[8]],
@@ -70,11 +56,35 @@ let winningCombos = [
 
 
 
+//2
+function randomStep(arg){
+    arg = Math.floor(Math.random() * board.length);
+    return arg;
+}
+
+do{
+    step2 = randomStep(step2)
+    break;
+} while(step2 < board.length || step2 > board.length)
 
 
 
 
+function player2Move (board,player) {
+    setTimeout(function(){
+        for(let i = 0; i < board.length; i++) {
+            if(step2 == board[i] && step2 != step) {
+                board[i] = player;
+                printBoard(board);
+                break;
+            }
+        }
+    },2000);
+    return board;
+}
 
+
+*/
 
 
 
