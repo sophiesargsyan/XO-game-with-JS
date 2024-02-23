@@ -1,5 +1,5 @@
 # XO game with JavaScript
-Welcome to the XO Game repository! This simple game allows you to play Tic Tac Toe (XO) against another player.
+Welcome to the XO Game repository! This simple game allows you to play Tic Tac Toe (XO) against console.
 
 ## Instalation 
 1. Clone the repository to your local machine using the following command:
