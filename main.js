@@ -1,13 +1,21 @@
 'use strict';
-//Choosing player
-let player1 = prompt('Choose x or o:').toUpperCase();
-let player2 = (player1 === 'X')? 'O':'X';
 
+// Print Start Board
+let board = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
 let player1Steps = [];
 let player2Steps = [];
+let win = [
+    [board[0], board[1], board[2]],
+    [board[3], board[4], board[5]],
+    [board[6], board[7], board[8]],
+    [board[0], board[3], board[6]],
+    [board[1], board[4], board[7]],
+    [board[2], board[5], board[8]],
+    [board[0], board[4], board[8]],
+    [board[2], board[4], board[6]]
+];
 
-//Print Start Board
-let board = ['1','2','3','4','5','6','7','8','9','10'];
+console.log("Start game.");
 
 function printBoard(board) {
     console.log(board[0] + " | " + board[1] + " | " + board[2]);
@@ -15,80 +23,72 @@ function printBoard(board) {
     console.log(board[6] + " | " + board[7] + " | " + board[8]);
     console.log("---------");
 }
-printBoard(board); 
 
-function player1Input(step){
-    step = +prompt('Enter value for your move: ');
+printBoard(board);
+
+// Choosing player
+let player1 = prompt('Choose x or o:').toUpperCase();
+let player2 = (player1 === 'X') ? 'O' : 'X';
+
+function player1Input() {
+    let step;
+    do {
+        step = +prompt('Enter value for your move: ');
+    } while (step < 1 || step > 10 || isNaN(step) || board[step - 1] === 'X' || board[step - 1] === 'O');
     return step;
 }
 
-player1Steps[0] = player1Input(player1Steps[0]);
-console.log(player1Steps)
+let player1StepsCount = 0;
+let player2StepsCount = 0;
 
-//1
-function player1Move (board, player,j) {
-    for(let i = 0; i < board.length; i++) {
-        if(player1Steps[j] == board[i]) {
-            board[i] = player;
-            printBoard(board);
-            break;
+function player1Move(board, player) {
+    let step = player1Input();
+    player1Steps.push(step.toString());
+    player1StepsCount++;
+    board[step - 1] = player;
+    printBoard(board);
+    return board;
+}
+
+function player2Move(board, player) {
+    let step = randomStep();
+    player2Steps.push(step.toString());
+    player2StepsCount++;
+    board[step - 1] = player;
+    printBoard(board);
+    return board;
+}
+
+function randomStep() {
+    let step;
+    do {
+        step = Math.floor(Math.random() * 10) + 1;
+    } while (board[step - 1] === 'X' || board[step - 1] === 'O');
+    return step;
+}
+
+while (true) {
+    player1Move(board, player1);
+    if (checkWin(player1Steps)) {
+        alert(`Congratulations! You win.`);
+        break;
+    }
+    if (player1StepsCount + player2StepsCount === 10) {
+        alert(`It's a draw!`);
+        break;
+    }
+    player2Move(board, player2);
+    if (checkWin(player2Steps)) {
+        alert(`Game over.`);
+        break;
+    }
+}
+
+function checkWin(steps) {
+    for (let i = 0; i < win.length; i++) {
+        if (win[i].every(val => steps.includes(val))) {
+            return true;
         }
     }
-    return board;
+    return false;
 }
-
-player1Move(board, player1, 0);
-
-/*
-// Winning combos
-let win = [
-    [board[0],board[1],board[2]],
-    [board[3],board[4],board[5]],
-    [board[6],board[7],board[8]],
-    [board[0],board[3],board[6]],
-    [board[1],board[4],board[7]],
-    [board[2],board[5],board[8]],
-    [board[0],board[4],board[8]],
-    [board[2],board[4],board[6]]
-]
-
-
-
-
-
-//2
-function randomStep(arg){
-    arg = Math.floor(Math.random() * board.length);
-    return arg;
-}
-
-do{
-    step2 = randomStep(step2)
-    break;
-} while(step2 < board.length || step2 > board.length)
-
-
-
-
-function player2Move (board,player) {
-    setTimeout(function(){
-        for(let i = 0; i < board.length; i++) {
-            if(step2 == board[i] && step2 != step) {
-                board[i] = player;
-                printBoard(board);
-                break;
-            }
-        }
-    },2000);
-    return board;
-}
-
-
-*/
-
-
-
-
-
-
-
