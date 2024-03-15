@@ -35,10 +35,10 @@ function player1Input() {
     do {
         step = +prompt('Enter value for your move: ');
         if (step < 1 || step > 10 || isNaN(step) || board[step - 1] === 'X' || board[step - 1] === 'O') {
-            alert("Invalid move!");
+            alert("Invalid move.");
             return -1;
         } else if (player2Steps.includes(step.toString())) {
-            alert("Number already taken by Player!");
+            alert("Number already taken by Player.");
             return -1;
         }
     } while (isNaN(step));
@@ -88,7 +88,7 @@ while (true) {
         break;
     }
     if (player1StepsCount + player2StepsCount === 10) {
-        alert(`It's a draw!`);
+        alert(`It's a draw.`);
         break;
     }
     player2Move(board, player2);
